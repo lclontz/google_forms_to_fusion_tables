@@ -139,18 +139,23 @@ function onFormSubmit(e) {
  * column to the sheet if it doesn't have one.
  */
 function init() {
-  // Set up global properties
-  DOCID = ScriptProperties.getProperty('docid');
+
+// Update for deprecated ScriptProperties API call
+
+  var docProperties = PropertiesService.getScriptProperties();  
+  DOCID = docProperties.getProperty('docid');
+  
+  Logger.log(DOCID)
   
   // Here is the first of two modifications to make the Address and Location work -- lc
   
   if (!DOCID) {
     throw 'The script is missing the required docid Project Property';
   }
-  ADDRESS_COLUMN = ScriptProperties.getProperty('addressColumn');
+  ADDRESS_COLUMN = docProperties.getProperty('addressColumn');
   Logger.log('Address Column is ' + ADDRESS_COLUMN);
   
-  LOCATION_COLUMN = ScriptProperties.getProperty('latlngColumn');
+  LOCATION_COLUMN = docProperties.getProperty('latlngColumn');
   Logger.log ('latlngColumn is ' + LOCATION_COLUMN);
               
   if (ADDRESS_COLUMN && !LOCATION_COLUMN) {
