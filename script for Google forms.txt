@@ -212,7 +212,9 @@ function createRecord(columnValues) {
         values.push(columnValues[column]);
       } 
       
-      
+       else {columns.push(column);
+        values.push(columnValues[column]);
+                    }
       
       
       
